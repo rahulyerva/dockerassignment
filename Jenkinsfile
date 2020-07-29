@@ -1,7 +1,8 @@
 pipeline {
    environment {
     registry = "rahulyerva/nginxphp"
-    registryCredential = 'dockerhub'
+    registryCredential = 'rahulyerva'
+    dockerimage = 'nginxphp:latest'
   }
    agent any
    stages {
@@ -12,14 +13,18 @@ pipeline {
      }
      stage('Build Docker Images from dockerfile'){
         steps {
-          sh 'docker build -t nginxphp:latest .'
+         script {
+         dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          }
         }
       }
-     stage('Push docker image to Dockerhub and ECR'){
+     stage('Push docker image to Dockerhub){
         steps {
-          
-            sh 'docker push rahulyerva/nginxphp:latest' 
-        
+          script {
+          docker.withRegistry( 'https://hub.docker.com', rahulyerva ) {
+          dockerImage.push()
+               }
+             }
         }
      }
    }
