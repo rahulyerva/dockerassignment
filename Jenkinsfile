@@ -14,6 +14,7 @@ pipeline {
         steps {
           sh 'docker build -t nginxphp:latest .'
         }
+     }
      stage('Push docker image to Dockerhub and ECR'){
         steps {
           
