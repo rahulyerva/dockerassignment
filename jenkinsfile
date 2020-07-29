@@ -11,7 +11,6 @@ pipeline {
      }
      stage('Build Docker Images from dockerfile'){
         steps {
-          sh 'cd Docker '
           sh 'docker build -t nginxphp:latest .'
         }
      stage('Push docker image to Dockerhub and ECR'){
