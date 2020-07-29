@@ -18,7 +18,7 @@ pipeline {
           }
         }
       }
-     stage('Push docker image to Dockerhub){
+     stage('Push docker image to Dockerhub'){
         steps {
           script {
           docker.withRegistry( 'https://hub.docker.com', rahulyerva ) {
