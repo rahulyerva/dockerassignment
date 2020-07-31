@@ -21,8 +21,8 @@ pipeline {
      stage('Push docker image to Dockerhub'){
         steps {
           script {
-          docker.withRegistry( 'https://registry.hub.docker.com', dockerhub ) {
-          dockerImage.push()
+            docker.withRegistry( 'https://registry.hub.docker.com/', dockerhub ) {
+            dockerImage.push()
                }
              }
         }
