@@ -7,7 +7,7 @@ pipeline {
    agent any
    stages {
      stage('pull repo'){
-    	steps {
+        steps {
           git 'https://github.com/rahulyerva/dockerassignment.git'
         }
      }
@@ -20,13 +20,17 @@ pipeline {
       }
      stage('Push docker image to Dockerhub'){
         steps {
-          withDockerRegistry([credentialsId: "9a35b249-0bcf-4562-bc96-bbc6054d3f52", url: "https://registry.hub.docker.com/" ]){ 
+          withDockerRegistry([credentialsId: "9a35b249-0bcf-4562-bc96-bbc6054d3f52", url: "https://registry.hub.docker.com/" ]){
           sh 'docker login -u rahulyerva -p Rahul@1995'
-          sh 'docker push rahulyerva/nginxphp'     
+          sh 'docker push rahulyerva/nginxphp'
           }
-          
+
         }
+     }
+     stage('Running ansible playbook for creating docker containers'){
+        steps {
+          sh 'ansible-playbook nginxphp.yml'
+          }
      }
    }
 }
-

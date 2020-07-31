@@ -1,0 +1,13 @@
+---
+- name: Pulling image from Dockerhub and Running containers
+  hosts: all
+  become: true
+  tasks:
+    - name: pulling image
+      docker_image:
+        name: rahulyerva/nginxphp
+        source: pull
+    - name: run a docker container
+      command: docker run --name nginxcon1 -itd -p 81:80 rahulyerva/nginxphp
+      command: docker run --name nginxcon2 -itd -p 82:80 rahulyerva/nginxphp
+  
