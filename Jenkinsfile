@@ -21,7 +21,7 @@ pipeline {
      stage('Push docker image to Dockerhub'){
         steps {
           withDockerRegistry([credentialsId: "9a35b249-0bcf-4562-bc96-bbc6054d3f52", url: "https://registry.hub.docker.com/" ]){ 
-          sh 'docker login -u rahulyerva -p $passwordVariable'
+          sh 'docker login -u rahulyerva -p Rahul@1995'
           sh 'docker push rahulyerva/nginxphp'     
           }
           
