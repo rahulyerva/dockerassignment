@@ -20,11 +20,9 @@ pipeline {
       }
      stage('Push docker image to Dockerhub'){
         steps {
-          script {
-            docker.withRegistry( 'https://registry.hub.docker.com/', dockerhub ) {
-            dockerImage.push()
-               }
-             }
+            withDockerRegistry([credentialsId: "e4e457f1-ed5e-4a39-8cf1-b5670da8f5b2", url: "https://registry.hub.docker.com/" ]) {
+              sh 'docker push rahulyerva/nginxphp:latest'     
+          }
         }
      }
    }
